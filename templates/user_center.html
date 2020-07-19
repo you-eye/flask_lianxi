@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+搜索: <input type="text" name="search"> <input type="button" value="搜索" id="search">
+<table border="1" cellspacing="0" width="50%">
+    <tr>
+        <th>序号</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>登陆时间</th>
+        <th>操作</th>
+    </tr>
+    {% for foo in users %}
+        <tr>
+            <th>{{ loop.index }}</th>
+            <th>{{ foo.username }}</th>
+            <th>{{ foo.phone }}</th>
+            <th>{{ foo.rdatetime }}</th>
+            <th><a href="">更新</a> <a href="{{ url_for('user.delete') }}?uid={{ foo.id }}">删除</a></th>
+        </tr>
+    {% endfor %}
+
+</table>
+<script>
+    $('#search').click(function () {
+        let content = $("input[name='search']").val();
+        location.href = "{{ url_for('user.search') }}?search=" + content
+    })
+</script>
+</body>
+</html>
